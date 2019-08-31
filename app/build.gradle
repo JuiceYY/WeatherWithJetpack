@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: "$rootDir/config.gradle"
+
+android {
+    compileSdkVersion buildConfig.compileSdkVersion
+    defaultConfig {
+        applicationId "cn.istary.weatherwithjetpack"
+        minSdkVersion buildConfig.minSdkVersion
+        targetSdkVersion buildConfig.targetSdkVersion
+        versionCode buildConfig.versionCode
+        versionName buildConfig.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libDependencies.kotlin
+    implementation libDependencies.compat
+    implementation libDependencies.androidx_core
+    implementation libDependencies.retrofit
+    implementation libDependencies.extensions
+    implementation libDependencies.okhttp
+    implementation libDependencies.rxjava
+    implementation libDependencies.room
+    kapt libDependencies.room_compiler
+    implementation libDependencies.glide
+    kapt libDependencies.glide_compiler
+    implementation libDependencies.material_design
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
